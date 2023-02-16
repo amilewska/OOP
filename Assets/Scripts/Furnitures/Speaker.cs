@@ -16,23 +16,29 @@ public class Speaker : Furnitures
 
     private void Update()
     {
-        if (isInteractable)
+        if (isInteractable&& Input.GetKeyDown(KeyCode.E))
         {
             Interact();
+            
         }
+
+        if (Input.GetMouseButton(0))
+        {
+            Pushable();
+        }
+        else Stable();
     }
 
     private void Interact()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
+        
             if (!isPlaying)
             {
                 TurnOn();
                 
             }
             else TurnOff();
-        }
+        
         
         
     }
