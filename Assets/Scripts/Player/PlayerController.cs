@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public float playerSpeed = 5;
     private Vector2 turn;
 
-    private float pushForce = 2;
+   [SerializeField] private float pushForce = 2;
 
 
 
@@ -80,15 +80,24 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    /*protected void OnControllerColliderHit(ControllerColliderHit hit)
+    protected void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        Debug.Log("they hit");
+
         Rigidbody rb = hit.collider.attachedRigidbody;
+
         if (rb != null)
         {
-            rb.AddForce(hit.moveDirection*hit.controller.velocity.magnitude);// = hit.moveDirection * pushForce/rb.mass;
+            Vector3 forceDirection = hit.gameObject.transform.position - transform.position;
+            forceDirection.y = 0;
+            forceDirection.Normalize();
+
+            rb.AddForceAtPosition(forceDirection * pushForce, transform.position, ForceMode.Impulse);
+
+
+            
+            //rb.AddForce(hit.moveDirection * hit.controller.velocity.magnitude * pushForce,ForceMode.Impulse);
         }
-    }*/
+    }
 
 
 }
