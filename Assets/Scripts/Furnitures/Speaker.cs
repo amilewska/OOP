@@ -14,33 +14,27 @@ public class Speaker : Furnitures
         //particleNotes = GetComponent<ParticleSystem>();
     }
 
-    private void Update()
+    override protected void Update()
     {
-        if (isInteractable&& Input.GetKeyDown(KeyCode.E))
-        {
-            Interact();
-            
-        }
+        base.Update();
 
-        if (Input.GetMouseButton(0))
-        {
-            Pushable();
-        }
-        else Stable();
+       
+        if(isInteractable&&isPlaying) Sound(Input.GetAxis("Mouse ScrollWheel"));
     }
 
-    private void Interact()
+    override protected void Interact()
     {
+        if (!isPlaying)
+        {
+            TurnOn();
         
-            if (!isPlaying)
-            {
-                TurnOn();
-                
-            }
-            else TurnOff();
+        }
+        else TurnOff();
         
-        
-        
+    }
+    private void Sound(float volume)
+    {
+        audioSource.volume += volume;
     }
 
 
@@ -49,6 +43,7 @@ public class Speaker : Furnitures
         audioSource.Play();
         particleNotes.Play();
         isPlaying = true;
+        
     }
 
     private void TurnOff()

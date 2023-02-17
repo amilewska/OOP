@@ -14,10 +14,9 @@ public class Seat : Furnitures
         player = GameObject.Find("Player");
     }
 
-    private void Update()
+    override protected void Update()
     {
-
-        if (isInteractable && Input.GetKeyDown(KeyCode.Q))
+        if (isInteractable && Input.GetKeyDown(KeyCode.E))
         {
 
             playerIsSitting = !playerIsSitting;
@@ -29,13 +28,9 @@ public class Seat : Furnitures
         {
             CanMove();
         }
-
-        if (Input.GetMouseButton(0))
-        {
-            Pushable();
-        }
-        else Stable();
+        base.Update();
     }
+
 
     private void CanSeat()
     {
