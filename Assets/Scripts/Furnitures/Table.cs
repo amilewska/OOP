@@ -4,13 +4,28 @@ using UnityEngine;
 
 public class Table : Furnitures
 {
+    bool isFlipping;
    override protected void Update()
     {
-        base.Update();
+        if (isInteractable && Input.GetMouseButton(0))
+        {
+            Pushable();
+        }
+
+        
+
+        if (isInteractable && Input.GetKeyDown(KeyCode.E))
+        {
+            Interact();
+            Pushable();
+
+        }
     }
     protected override void Interact()
     {
+        
         Rigidbody rb = GetComponent<Rigidbody>();
+        rb.isKinematic = false;
         GameObject player = GameObject.Find("Player");
 
         Vector3 playerDirection = transform.position;

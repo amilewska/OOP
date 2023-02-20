@@ -44,7 +44,7 @@ public abstract class Furnitures : MonoBehaviour
 
     }
 
-    protected void Stable()
+    protected virtual void Stable()
     {
          GetComponent<Rigidbody>().isKinematic = true;
     }

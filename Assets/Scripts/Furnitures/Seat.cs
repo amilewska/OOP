@@ -36,7 +36,7 @@ public class Seat : Furnitures
     private void CanSeat()
     {
         //block movement of the object and player
-        player.GetComponent<CharacterController>().minMoveDistance = 1;
+        player.GetComponent<CharacterController>().minMoveDistance = 100;
 
         //rotate the player 180 deegres 
         Quaternion target = Quaternion.Euler(0, 180, 0);
