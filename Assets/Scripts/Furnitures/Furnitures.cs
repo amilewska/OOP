@@ -9,7 +9,7 @@ public abstract class Furnitures : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (isInteractable && Input.GetMouseButton(0))
         {
             Pushable();
         }
@@ -42,9 +42,7 @@ public abstract class Furnitures : MonoBehaviour
 
     protected void Pushable()
     {
-        if(isInteractable) GetComponent<Rigidbody>().isKinematic = false;
-        else GetComponent<Rigidbody>().isKinematic = true;
-
+        GetComponent<Rigidbody>().isKinematic = false;
 
     }
 

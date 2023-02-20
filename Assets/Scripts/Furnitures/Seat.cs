@@ -5,9 +5,9 @@ using UnityEngine;
 public class Seat : Furnitures
 {
    
-    public GameObject player;
-    [SerializeField]Transform seatPosition;
-    bool playerIsSitting = false;
+    private GameObject player;
+    [SerializeField]private Transform seatPosition;
+    private bool playerIsSitting = false;
 
     private void Start()
     {
@@ -39,7 +39,7 @@ public class Seat : Furnitures
 
         //rotate the player 180 deegres 
         Quaternion target = Quaternion.Euler(0, 180, 0);
-        player.transform.position = Vector3.Lerp(player.transform.position, seatPosition.position + Vector3.up,Time.deltaTime*5);
+        player.transform.position = Vector3.Lerp(player.transform.position, seatPosition.position,Time.deltaTime*5);
         player.transform.LookAt(player.transform.position - transform.right);
     }
 

@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Lightining : Furnitures
 {
-    [SerializeField] public Light bulbLight;
+    public Light bulbLight;
     private bool isTurnOn=true;
 
+    private void Start()
+    {
+        bulbLight = GetComponentInChildren<Light>();
+    }
 
     override protected void Update()
     {
         base.Update();
-
-        Interact();
 
         if(isTurnOn&&isInteractable) LightIntense(Input.GetAxis("Mouse ScrollWheel"));
     }
@@ -23,7 +25,7 @@ public class Lightining : Furnitures
         return bulbLight.intensity;
     }
 
-    override protected void Interact() //ABSTRACTION
+    override protected void Interact() //POLYMORPHISM
     {
         isTurnOn = !isTurnOn;
         
