@@ -16,21 +16,22 @@ public class Seat : Furnitures
 
     override protected void Update()
     {
-        if (isInteractable && Input.GetKeyDown(KeyCode.E))
-        {
-
-            playerIsSitting = !playerIsSitting;
-
-        }
+        base.Update();
 
         if (playerIsSitting) CanSeat();
+
         else
         {
             CanMove();
         }
-        base.Update();
+        
     }
 
+    protected override void Interact()
+    {
+        playerIsSitting = !playerIsSitting;
+
+    }
 
     private void CanSeat()
     {

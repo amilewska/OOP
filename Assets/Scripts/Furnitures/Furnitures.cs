@@ -22,6 +22,7 @@ public abstract class Furnitures : MonoBehaviour
         }
     }
 
+    protected abstract void Interact();
 
     protected void OnTriggerEnter(Collider other)
     {
@@ -34,10 +35,7 @@ public abstract class Furnitures : MonoBehaviour
         
     }
 
-    protected virtual void Interact()
-    {
-
-    }
+    
 
 
     protected void Pushable()
