@@ -12,8 +12,6 @@ public class PlayerController : MonoBehaviour
 
    [SerializeField] private float pushForce = 2;
 
-
-
     public bool playerIsGrounded;
     public float gravity = -9.81f;
     public float jumpHeight = 30f;
