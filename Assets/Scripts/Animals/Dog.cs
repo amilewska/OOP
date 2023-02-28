@@ -10,6 +10,7 @@ public class Dog : Animal
         base.Start();
         jumpForce = 150f;
         movementSpeed = 1f;
+        timeBeforeNextJump = 10;
     }
 
     // Update is called once per frame

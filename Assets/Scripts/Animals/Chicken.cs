@@ -2,20 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cat : Animal
+public class Chicken : Animal
 {
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
-        jumpForce = 200f;
+        jumpForce = 400f;
         movementSpeed = 3;
-
+        timeBeforeNextJump = 3;
     }
 
-    // Update is called once per frame
-    protected override void Update()
-    {
-        base.Update();
-    }
 }
