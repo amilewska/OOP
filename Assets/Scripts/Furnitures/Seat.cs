@@ -36,18 +36,20 @@ public class Seat : Furnitures
     private void CanSeat()
     {
         //block movement of the object and player
-        player.GetComponent<CharacterController>().minMoveDistance = 100;
+        player.GetComponent<CharacterController>().enabled = false;
 
         //rotate the player 180 deegres 
         Quaternion target = Quaternion.Euler(0, 180, 0);
-        player.transform.position = Vector3.Lerp(player.transform.position, seatPosition.position,Time.deltaTime*5);
-        player.transform.LookAt(player.transform.position - transform.right);
+        //player.transform.position = Vector3.Lerp(player.transform.position, seatPosition.position,Time.deltaTime*5);
+        //player.transform.LookAt(player.transform.position - transform.right);
+        player.transform.position = Vector3.MoveTowards(player.transform.position, seatPosition.position, Time.deltaTime * 5);
+        player.transform.rotation = Quaternion.LookRotation(seatPosition.forward);
     }
 
     private void CanMove()
     {
         
-        player.GetComponent<CharacterController>().minMoveDistance = 0.001f;
+        player.GetComponent<CharacterController>().enabled = true;
         
 
     }

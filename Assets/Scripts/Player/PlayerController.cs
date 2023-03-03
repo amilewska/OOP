@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float mouseSensitivity = 1f;
+    public float mouseSensitivity = 200f;
 
     public CharacterController controller;
     public float playerSpeed = 5;
+    [Range(-90,90)]
     private Vector2 turn;
+    [SerializeField] Transform playerBody;
 
    [SerializeField] private float pushForce = 2;
 
@@ -20,11 +22,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        //MouseLook();
         LookAtMouse();
         Move();
         Jump();
 
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     ///<summary>
@@ -32,10 +35,26 @@ public class PlayerController : MonoBehaviour
     ///</summary>
     private void LookAtMouse() //ABSTRACTION
     {
-        turn.x += Input.GetAxis("Mouse X") * mouseSensitivity;
-        turn.y += Input.GetAxis("Mouse Y") * mouseSensitivity;
+        turn.x += Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        turn.y += Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
         transform.localRotation = Quaternion.Euler(-turn.y, turn.x, 0);
+        //transform.Rotate(new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0)*Time.deltaTime*mouseSensitivity);
         
+    }
+
+    private void MouseLook() 
+    {
+        float xRotation = 0;
+
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90, 90);
+
+        transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        playerBody.Rotate(Vector3.up* mouseX);
+    
     }
 
     private void Move() //ABSTRACTION

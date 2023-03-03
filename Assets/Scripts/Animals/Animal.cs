@@ -11,6 +11,9 @@ public abstract class Animal : MonoBehaviour
     protected float canJump = 0;
     protected Vector3 randomDirection;
 
+    protected bool makeSound = false;
+    protected AudioSource audioSource;
+
     protected float timeInterval = 2;
     protected float timeBeforeNextMove = 2f;
     protected bool flowerIsNear;
@@ -24,6 +27,7 @@ public abstract class Animal : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         randomDirection = RandomVector();
+        audioSource = GetComponent<AudioSource>();
 
     }
 
@@ -32,8 +36,6 @@ public abstract class Animal : MonoBehaviour
         Move();
         if (flowerIsNear) Eat(flowerTarget);
         //Jump(jumpForce);
-        //MakeSound();
-       // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.right), 0) ;
     }
 
 
@@ -118,6 +120,11 @@ public abstract class Animal : MonoBehaviour
             flowerIsNear = false;
         }
 
+        if(collision.gameObject.CompareTag("Player")|| collision.gameObject.CompareTag("Obstacle"))
+        {
+            MakeSound();
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -148,6 +155,6 @@ public abstract class Animal : MonoBehaviour
 
     protected void MakeSound()
     {
-
+        audioSource.Play();
     }
 }
