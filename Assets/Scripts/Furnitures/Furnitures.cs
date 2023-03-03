@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Furnitures : MonoBehaviour
 {
     
-    protected bool isInteractable;
+    [SerializeField]protected bool isInteractable;
 
     protected virtual void Update()
     {

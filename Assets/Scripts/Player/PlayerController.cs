@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
 
     public CharacterController controller;
     public float playerSpeed = 5;
-    [Range(-90,90)]
     private Vector2 turn;
     [SerializeField] Transform playerBody;
 
@@ -23,7 +22,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //MouseLook();
-        LookAtMouse();
+        //LookAtMouse();
         Move();
         Jump();
 
@@ -79,11 +78,14 @@ public class PlayerController : MonoBehaviour
 
         //vector which takes player's input (and its transforms directions) to move
         Vector3 move = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
+
+        if (controller.enabled)
+        {
+            controller.Move(move * Time.deltaTime * playerSpeed);
+            velocity.y += gravity * Time.deltaTime;
+            controller.Move(velocity * Time.deltaTime);
+        }
         
-        //players move and gravity
-        controller.Move(move * Time.deltaTime * playerSpeed);
-        velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
         
     }
 
