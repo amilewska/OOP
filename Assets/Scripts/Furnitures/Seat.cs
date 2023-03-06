@@ -7,7 +7,7 @@ public class Seat : Furnitures
    
     private GameObject player;
     [SerializeField]private Transform seatPosition;
-    private bool playerCanSeat = false;
+    private bool playerCanSeat;
 
     private void Start()
     {
@@ -18,40 +18,45 @@ public class Seat : Furnitures
     {
         base.Update();
 
-        if (playerCanSeat) SeatPlayer();//StartCoroutine(Seating());
+        if (playerCanSeat)
+        { 
+            //SeatPlayer();
+            StartCoroutine(Seating());
+                         
+        }
 
 
     }
 
-    protected override void Interact()
+    override protected void Interact()
     {
         playerCanSeat = !playerCanSeat;
 
-        if (playerCanSeat) PlayerCantMove();
+        if (playerCanSeat) PlayerStopped();
         else PlayerCanMove();
 
     }
 
     IEnumerator Seating()
     {
-        player.transform.position = Vector3.Lerp(player.transform.position, seatPosition.position, Time.deltaTime * 500);
-        player.transform.LookAt(player.transform.position - transform.right);
-        yield return new WaitForSeconds(10);
+        
+        player.transform.position = Vector3.Lerp(player.transform.position, seatPosition.position, Time.deltaTime*0.5f);
+        player.transform.rotation = Quaternion.Slerp(player.transform.rotation, Quaternion.Euler(0, player.transform.rotation.y-90,0), Time.deltaTime * 0.5f);
+        yield return null;
+        //Quaternion.Euler(0, -90, 0)
+
+
     }
 
     private void SeatPlayer()
     {
-        Debug.Log("method seating player");
-        //player.transform.position = Vector3.Lerp(player.transform.position, seatPosition.position,Time.deltaTime*500);
-        player.transform.LookAt(player.transform.position - transform.right);
-        player.transform.position = Vector3.MoveTowards(player.transform.position, seatPosition.position, Time.deltaTime * 5);
-        //player.transform.rotation = Quaternion.LookRotation(seatPosition.forward);
+        player.transform.position = Vector3.Lerp(player.transform.position, seatPosition.position, Time.deltaTime);
+        player.transform.rotation = Quaternion.Lerp(player.transform.rotation, Quaternion.Euler(0,180,0), Time.time);
     }
 
-    private void PlayerCantMove()
+    private void PlayerStopped()
     {
-        //player.GetComponent<CharacterController>().enabled = false;
-        player.GetComponent<CharacterController>().minMoveDistance = 100;
+        player.GetComponent<CharacterController>().enabled = false;
         player.GetComponentInChildren<MouseLook>().enabled = false;
         player.GetComponent<PlayerController>().enabled = false;
 
@@ -59,9 +64,7 @@ public class Seat : Furnitures
     }
     private void PlayerCanMove()
     {
-        
-        //player.GetComponent<CharacterController>().enabled = true;
-        player.GetComponent<CharacterController>().minMoveDistance = 0.001f;
+        player.GetComponent<CharacterController>().enabled = true;
         player.GetComponentInChildren<MouseLook>().enabled = true;
         player.GetComponent<PlayerController>().enabled = true;
 

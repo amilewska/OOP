@@ -651,6 +651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce4e0aaf65f05204eb56bd8a6a162944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInteractable: 0
   seatPosition: {fileID: 3355385302348808223}
 --- !u!65 &3355385302526513809
 BoxCollider:
@@ -663,8 +664,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4, y: 1.97, z: 4}
-  m_Center: {x: -0.48, y: -0.74, z: 0}
+  m_Size: {x: 4, y: 4.0730643, z: 4}
+  m_Center: {x: -0.48000002, y: 0.31153226, z: 2.8421513e-16}
 --- !u!1 &3355385302627723467
 GameObject:
   m_ObjectHideFlags: 0
